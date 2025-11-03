@@ -1,13 +1,16 @@
 import React from 'react';
 import { ChevronDown, TrendingUp, Users, BookOpen, Zap, Bell, Play, CheckCircle, ArrowRight, Calendar, Clock, Target, BarChart3, MessageCircle, Mail } from 'lucide-react';
+import { useRouter } from 'next/router';
 
 const AlphaTradingLanding = () => {
+  const router = useRouter();
+
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleJoinNow = () => {
-    window.open('https://buy.stripe.com/dRmdR876a15ebf183c5os0a', '_blank');
+    router.push('/packages');
   };
 
   return (
@@ -33,14 +36,12 @@ const AlphaTradingLanding = () => {
           justifyContent: 'space-between'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-{/* Your Actual Alpha Logo */}
-<div style={{ width: '3rem', height: '3rem', position: 'relative' }}>
-  <img 
-    src="/Alpha Trading.png" 
-    alt="Alpha Trading Logo" 
-    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-  />
-</div>
+            <div style={{ width: '3rem', height: '3rem', position: 'relative' }}>
+              <img
+                src="/Alpha Trading.png"
+                alt="Alpha Trading Logo"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              />
             </div>
             <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'white' }}>Alpha Trading Pros</div>
           </div>
