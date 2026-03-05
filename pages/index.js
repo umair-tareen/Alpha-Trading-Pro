@@ -1,90 +1,79 @@
-import Head from 'next/head'
-import AlphaTradingLanding from '../components/AlphaTradingLanding'
+import Head from 'next/head';
+import AlphaTradingLanding from '../components/AlphaTradingLanding';
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Alpha Trading Pros - Live Trading Signals & Options Education | $159.99/Month</title>
-        <meta name="description" content="Get live trading signals, monthly webinars, and exclusive educational resources for options and futures trading. Join 500+ successful traders with 85% win rate. Subscribe for $159.99/month." />
-        
-        {/* SEO Keywords */}
-        <meta name="keywords" content="trading signals, options trading, futures trading, trading education, prop firm trading, ORB strategy, trading subscription, live trading alerts, trading webinars, options signals, day trading, swing trading" />
-        
-        {/* Viewport and basics */}
+        <title>Alpha Trading Pro | Trading Mentorship, Education & Algo Tools</title>
+        <meta
+          name="description"
+          content="Alpha Trading Pro offers structured trading mentorship for options and futures, community coaching, and AI-assisted market scanning tools to help traders build skill and discipline."
+        />
+        <meta
+          name="keywords"
+          content="trading mentorship, learn stock trading, day trading course, small cap trading strategy, stock scanner strategies, momentum trading strategies, how to trade stocks"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="Alpha Trading Pros" />
+        <meta name="author" content="Alpha Trading Pro" />
         <link rel="canonical" href="https://alphatradingpros.com" />
-        
-        {/* Favicon */}
         <link rel="icon" href="/Alpha Trading.png" />
         <link rel="apple-touch-icon" href="/Alpha Trading.png" />
-        
-        {/* Open Graph / Facebook */}
+
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://alphatradingpros.com/" />
-        <meta property="og:title" content="Alpha Trading Pros - Live Trading Signals & Options Education" />
-        <meta property="og:description" content="Join 500+ successful traders with 85% win rate. Get live trading signals, monthly webinars, and exclusive educational resources for options and futures trading." />
+        <meta property="og:title" content="Alpha Trading Pro | Mentorship and Structured Trading Education" />
+        <meta
+          property="og:description"
+          content="Learn to trade with structure, discipline, and confidence through mentorship, strategy playbooks, and AI-assisted tools."
+        />
         <meta property="og:image" content="https://alphatradingpros.com/Alpha Trading.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="Alpha Trading Pros" />
+        <meta property="og:site_name" content="Alpha Trading Pro" />
 
-        {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:site" content="@AlphaTradingHQ" />
-        <meta property="twitter:creator" content="@AlphaTradingHQ" />
-        <meta property="twitter:url" content="https://alphatradingpros.com/" />
-        <meta property="twitter:title" content="Alpha Trading Pros - Live Trading Signals & Options Education" />
-        <meta property="twitter:description" content="Join 500+ successful traders with 85% win rate. Get live trading signals and exclusive educational resources." />
+        <meta property="twitter:title" content="Alpha Trading Pro | Trading Mentorship" />
+        <meta
+          property="twitter:description"
+          content="Structured mentorship for options and futures traders focused on discipline, market structure, and repeatable execution."
+        />
         <meta property="twitter:image" content="https://alphatradingpros.com/Alpha Trading.png" />
 
-        {/* Additional SEO */}
         <meta name="theme-color" content="#10b981" />
         <meta name="msapplication-TileColor" content="#10b981" />
-        
-        {/* Schema.org structured data */}
-        <script 
+
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Alpha Trading Pros",
-              "url": "https://alphatradingpros.com",
-              "logo": "https://alphatradingpros.com/Alpha Trading.png",
-              "description": "Professional trading signals and education for options and futures traders",
-              "founder": {
-                "@type": "Person",
-                "name": "Alpha Trading Pros Team"
+              '@context': 'https://schema.org',
+              '@type': 'EducationalOrganization',
+              name: 'Alpha Trading Pro',
+              url: 'https://alphatradingpros.com',
+              logo: 'https://alphatradingpros.com/Alpha Trading.png',
+              description:
+                'A structured options and futures trading mentorship program focused on market structure, discipline, strategy playbooks, and AI-assisted market scanning tools.',
+              offers: {
+                '@type': 'OfferCatalog',
+                name: 'Alpha Trading Programs',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    name: 'Trading Mentorship Program',
+                    description: 'Structured education, live mentorship sessions, and community coaching.',
+                  },
+                  {
+                    '@type': 'Offer',
+                    name: 'AI-Assisted Market Scanning Tools',
+                    description: 'Algorithmic scanners and alerts designed to support trader decision-making.',
+                  },
+                ],
               },
-              "offers": {
-                "@type": "Offer",
-                "name": "Alpha Trading Subscription",
-                "price": "159.99",
-                "priceCurrency": "USD",
-                "priceValidUntil": "2025-12-31",
-                "itemCondition": "https://schema.org/NewCondition",
-                "availability": "https://schema.org/InStock",
-                "url": "https://alphatradingpros.com",
-                "description": "Monthly subscription for live trading signals, webinars, and educational resources"
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "contactType": "customer service",
-                "email": "info@alphadatacapital.com"
-              },
-              "sameAs": [
-                "https://x.com/AlphaTradingHQ",
-                "https://instagram.com/alphatradinghq",
-                "https://alphatradingpros.com"
-              ]
-            })
+            }),
           }}
         />
       </Head>
       <AlphaTradingLanding />
     </>
-  )
+  );
 }
