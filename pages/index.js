@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <Head>
         <title>Alpha Trading Pros - Live Trading Signals & Options Education | $159.99/Month</title>
-        <meta name="description" content="Get live trading signals, monthly webinars, and exclusive educational resources for options and futures trading. Join 500+ successful traders with 85% win rate. Subscribe for $159.99/month." />
+        <meta name="description" content="Get live trading signals, monthly webinars, and exclusive educational resources for options and futures trading. Disciplined, rules-based ORB strategy education. Subscribe for $159.99/month." />
         
         {/* SEO Keywords */}
         <meta name="keywords" content="trading signals, options trading, futures trading, trading education, prop firm trading, ORB strategy, trading subscription, live trading alerts, trading webinars, options signals, day trading, swing trading" />
@@ -25,7 +25,7 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://alphatradingpros.com/" />
         <meta property="og:title" content="Alpha Trading Pros - Live Trading Signals & Options Education" />
-        <meta property="og:description" content="Join 500+ successful traders with 85% win rate. Get live trading signals, monthly webinars, and exclusive educational resources for options and futures trading." />
+        <meta property="og:description" content="Live trading signals, monthly webinars, and structured educational resources for options and futures trading." />
         <meta property="og:image" content="https://alphatradingpros.com/Alpha Trading.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -37,7 +37,7 @@ export default function Home() {
         <meta property="twitter:creator" content="@AlphaTradingHQ" />
         <meta property="twitter:url" content="https://alphatradingpros.com/" />
         <meta property="twitter:title" content="Alpha Trading Pros - Live Trading Signals & Options Education" />
-        <meta property="twitter:description" content="Join 500+ successful traders with 85% win rate. Get live trading signals and exclusive educational resources." />
+        <meta property="twitter:description" content="Live trading signals, monthly webinars, and structured education for options and futures traders." />
         <meta property="twitter:image" content="https://alphatradingpros.com/Alpha Trading.png" />
 
         {/* Additional SEO */}

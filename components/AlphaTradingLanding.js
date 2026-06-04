@@ -41,7 +41,6 @@ const AlphaTradingLanding = () => {
     style={{ width: '100%', height: '100%', objectFit: 'contain' }}
   />
 </div>
-            </div>
             <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'white' }}>Alpha Trading Pros</div>
           </div>
           <button 
@@ -220,7 +219,7 @@ const AlphaTradingLanding = () => {
               <span style={{ color: '#10b981' }}> Alpha Trading Subscriber</span>
             </h2>
             <p style={{ fontSize: '1.25rem', color: '#cbd5e1', maxWidth: '48rem', margin: '0 auto' }}>
-              Everything you need to trade smarter, learn faster, and profit consistently
+              Everything you need to trade smarter, learn faster, and manage risk with discipline
             </p>
           </div>
 
@@ -419,7 +418,7 @@ const AlphaTradingLanding = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* What's Included Section */}
       <section style={{
         padding: '5rem 0',
         background: 'linear-gradient(to right, rgba(30, 41, 59, 0.5), rgba(126, 34, 206, 0.3))'
@@ -427,115 +426,14 @@ const AlphaTradingLanding = () => {
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-              What Our <span style={{ color: '#10b981' }}>Alpha Traders</span> Are Saying
+              What You Get as an <span style={{ color: '#10b981' }}>Alpha Trader</span>
             </h2>
             <p style={{ fontSize: '1.25rem', color: '#cbd5e1', maxWidth: '48rem', margin: '0 auto' }}>
-              Real results from real traders who've transformed their trading with our signals and strategies
+              Everything in the subscription, laid out plainly — live signals, structured education, and weekly market context
             </p>
           </div>
 
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-            gap: '2rem'
-          }}>
-            {[
-              {
-                initial: 'M',
-                name: 'Marcus R.',
-                role: 'Options Trader, 2 years experience',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'The ORB strategy alone has completely changed my trading game. I went from losing money consistently to having my best month ever. The signals are spot-on and the community support is incredible.',
-                result: '+$8,500 in 30 days',
-                gradient: 'linear-gradient(to bottom right, #10b981, #2563eb)'
-              },
-              {
-                initial: 'S',
-                name: 'Sarah L.',
-                role: 'Futures Trader, Beginner',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'As a complete beginner, I was overwhelmed by futures trading. The educational content and live signals gave me the confidence to start trading profitably within my first month.',
-                result: '$2,300 profit as a beginner',
-                gradient: 'linear-gradient(to bottom right, #3b82f6, #a855f7)'
-              },
-              {
-                initial: 'D',
-                name: 'David K.',
-                role: 'Prop Firm Trader',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'The prop firm insights are pure gold. I passed my evaluation on the second try using the risk management techniques taught here. Now I\'m trading with $100K in firm capital.',
-                result: 'Passed $100K prop firm eval',
-                gradient: 'linear-gradient(to bottom right, #a855f7, #ec4899)'
-              },
-              {
-                initial: 'A',
-                name: 'Amanda T.',
-                role: 'Day Trader, 5 years experience',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'I\'ve been trading for years but was stuck in a rut. The weekly newsletter and monthly webinars opened my eyes to new strategies. My win rate jumped from 60% to 82%.',
-                result: 'Win rate: 60% → 82%',
-                gradient: 'linear-gradient(to bottom right, #f59e0b, #ef4444)'
-              },
-              {
-                initial: 'J',
-                name: 'James W.',
-                role: 'Options Trader, Side hustle',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'Working full-time, I needed signals I could trust. The Telegram alerts let me catch profitable moves even during my lunch breaks. Made enough to pay off my car!',
-                result: '$12,000 side income',
-                gradient: 'linear-gradient(to bottom right, #06b6d4, #2563eb)'
-              },
-              {
-                initial: 'R',
-                name: 'Rachel M.',
-                role: 'Former Stock Trader',
-                rating: '⭐⭐⭐⭐⭐',
-                text: 'Transitioning from stocks to options seemed impossible until I found Alpha Trading. The educational content is top-notch and the support is phenomenal. Worth every penny!',
-                result: 'Successful transition to options',
-                gradient: 'linear-gradient(to bottom right, #10b981, #059669)'
-              }
-            ].map((testimonial, index) => (
-              <div key={index} style={{
-                backgroundColor: 'rgba(30, 41, 59, 0.4)',
-                backdropFilter: 'blur(16px)',
-                borderRadius: '0.75rem',
-                padding: '2rem',
-                border: '1px solid rgba(71, 85, 105, 0.5)',
-                transition: 'all 0.3s'
-              }}
-              onMouseOver={(e) => e.currentTarget.style.borderColor = '#10b981'}
-              onMouseOut={(e) => e.currentTarget.style.borderColor = 'rgba(71, 85, 105, 0.5)'}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem' }}>
-                  <div style={{
-                    width: '3rem',
-                    height: '3rem',
-                    background: testimonial.gradient,
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: '1.125rem'
-                  }}>
-                    {testimonial.initial}
-                  </div>
-                  <div style={{ marginLeft: '1rem' }}>
-                    <div style={{ fontWeight: '600', color: 'white' }}>{testimonial.name}</div>
-                    <div style={{ color: '#64748b', fontSize: '0.875rem' }}>{testimonial.role}</div>
-                  </div>
-                </div>
-                <div style={{ color: '#eab308', marginBottom: '1rem' }}>{testimonial.rating}</div>
-                <p style={{ color: '#cbd5e1', lineHeight: '1.6', marginBottom: '1rem' }}>
-                  {testimonial.text}
-                </p>
-                <div style={{ color: '#10b981', fontWeight: '600' }}>{testimonial.result}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Trust Indicators */}
+          {/* What's Included */}
           <div style={{ marginTop: '4rem', textAlign: 'center' }}>
             <div style={{
               display: 'grid',
@@ -544,10 +442,10 @@ const AlphaTradingLanding = () => {
               marginBottom: '3rem'
             }}>
               {[
-                { number: '500+', label: 'Happy Subscribers', color: '#10b981' },
-                { number: '85%', label: 'Average Win Rate', color: '#3b82f6' },
-                { number: '$2.1M+', label: 'Total Profits Generated', color: '#a855f7' },
-                { number: '4.9/5', label: 'Customer Rating', color: '#eab308' }
+                { number: 'Live', label: 'Signals via WhatsApp & Telegram', color: '#10b981' },
+                { number: 'Monthly', label: 'Live Strategy Webinars', color: '#3b82f6' },
+                { number: 'Weekly', label: 'Newsletter & Trade Recaps', color: '#a855f7' },
+                { number: 'ORB', label: 'Strategy Education & Mentorship', color: '#eab308' }
               ].map((stat, index) => (
                 <div key={index} style={{ textAlign: 'center' }}>
                   <div style={{ fontSize: '2rem', fontWeight: 'bold', color: stat.color, marginBottom: '0.5rem' }}>{stat.number}</div>
@@ -564,9 +462,9 @@ const AlphaTradingLanding = () => {
               maxWidth: '48rem',
               margin: '0 auto'
             }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#10b981' }}>Join the Success Stories</h3>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#10b981' }}>Ready to Trade with Structure?</h3>
               <p style={{ fontSize: '1.125rem', color: '#cbd5e1', marginBottom: '1.5rem' }}>
-                Don't wait – start your journey to consistent trading profits today
+                Join a community focused on disciplined, rules-based trading — learn the process before you risk capital
               </p>
               <button 
                 onClick={handleJoinNow}
@@ -593,6 +491,11 @@ const AlphaTradingLanding = () => {
               >
                 Get Started Now - $159.99/Month
               </button>
+              <p style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '1.5rem', lineHeight: '1.5' }}>
+                Trading futures and options involves substantial risk of loss and is not suitable for every investor.
+                Signals and education are provided for informational purposes only and are not financial advice.
+                Past performance is not indicative of future results.
+              </p>
             </div>
           </div>
         </div>
@@ -605,11 +508,11 @@ const AlphaTradingLanding = () => {
       }}>
         <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 1.5rem', textAlign: 'center' }}>
           <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-            Don't Trade Alone – Get Signals & Strategies That Work
+            Don't Trade Alone – Learn a Structured, Rules-Based Approach
           </h2>
-          
+
           <p style={{ fontSize: '1.25rem', marginBottom: '3rem', opacity: 0.9 }}>
-            Join Alpha Trading today and start your journey towards consistent profitability
+            Join Alpha Trading today for live signals, education, and a community that takes risk management seriously
           </p>
           
           <button 
