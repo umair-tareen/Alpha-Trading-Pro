@@ -3,6 +3,14 @@ node_modules/
 out/
 *.log
 .DS_Store
+
+# Impeccable design tooling (installed locally via npx, not part of the site)
+.claude/
+.agents/
+.cursor/
+.codex/
+.gemini/
+.impeccable/
 .env.local
 .env.development.local
 .env.test.local
