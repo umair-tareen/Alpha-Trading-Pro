@@ -1,588 +1,459 @@
 import React from 'react';
-import { ChevronDown, TrendingUp, Users, BookOpen, Zap, Bell, Play, CheckCircle, ArrowRight, Calendar, Clock, Target, BarChart3, MessageCircle, Mail } from 'lucide-react';
+import {
+  Check, X, ArrowRight, Brain, ShieldCheck, Target, LineChart, Activity,
+  ListChecks, BookOpen, Layers, Cpu, LayoutDashboard, Bell, MessageCircle, Zap
+} from 'lucide-react';
+
+// Stripe payment links, one per product. Filled in after the links are created.
+const CHECKOUT = {
+  entry: 'https://buy.stripe.com/8x2dR82PUaFO3MzerA5os0m',
+  intermediate: 'https://buy.stripe.com/6oUcN4cqu6pyaaXgzI5os0n',
+  advanced: 'https://buy.stripe.com/cNi00ifCG4hq82Pbfo5os0o',
+  terminal: 'https://buy.stripe.com/cNi3cu1LQ01adn90AK5os0p',
+};
+
+const PACKAGES = [
+  {
+    key: 'entry',
+    name: 'Entry-Level',
+    sub: 'Stocks mentorship, 1-on-1',
+    price: '$3,400',
+    cadence: 'one-time',
+    featured: false,
+    cta: 'Start at Entry-Level',
+    features: [
+      '4x one-on-one mentorship sessions',
+      'Morning checklist & dilution tracker guide',
+      'Entry setups & indicators',
+      'Technical analysis for entry and exit zones',
+      'Risk management & position sizing fundamentals',
+      'Trade journaling framework',
+      'SPY & small-cap watchlist process',
+    ],
+  },
+  {
+    key: 'intermediate',
+    name: 'Intermediate',
+    sub: 'Stocks + options mentorship',
+    price: '$4,900',
+    cadence: 'one-time',
+    featured: true,
+    cta: 'Choose Intermediate',
+    features: [
+      'Everything in Entry-Level, included',
+      '6x one-on-one mentorship sessions',
+      'Dividend income with the Wheel strategy',
+      'Options trading: calls, puts & spreads',
+      'Income strategies & covered calls',
+      'Options risk management & Greeks basics',
+      'Catalyst & earnings playbook',
+    ],
+  },
+  {
+    key: 'advanced',
+    name: 'Advanced Elite',
+    sub: 'Stocks + options + futures, 1-on-1',
+    price: '$6,900',
+    cadence: 'one-time',
+    featured: false,
+    cta: 'Go Advanced Elite',
+    features: [
+      'Everything in Intermediate, included',
+      '10x one-on-one mentorship sessions',
+      'Futures mastery (micro & nano contracts)',
+      'Liquidity maps & smart money concepts',
+      'Order flow & market structure reading',
+      'Advanced risk & trade management',
+      'Personal trading playbook development',
+      'Trading psychology & discipline coaching',
+      'Priority scheduling & support',
+    ],
+  },
+];
+
+const SELL = ['Indicators', 'Alerts', 'Discord access', '"Winning setups"', 'Lifestyle marketing'];
+const TEACH = ['Decision making', 'Risk management', 'Trade management', 'Psychology', 'Consistency systems'];
+
+const DAYS = [
+  { n: 'Day 01', t: 'Foundations' },
+  { n: 'Day 02', t: 'Market Structure' },
+  { n: 'Day 03', t: 'Execution & Risk' },
+  { n: 'Day 04', t: 'Playbook Development' },
+];
+
+const PRINCIPLES = [
+  {
+    icon: Target,
+    title: 'Small-cap & SPY focus',
+    body: 'No jumping between forex, crypto, and penny stocks until you are overwhelmed. We focus on SPY, small caps, technical analysis, and catalysts. Far easier to actually master.',
+  },
+  {
+    icon: LineChart,
+    title: 'We teach the "why"',
+    body: 'Not just "support is here." Why support exists, who is buying there, what volume confirms it, and what invalidates it. Understanding, not memorized lines.',
+  },
+  {
+    icon: Activity,
+    title: 'Real trading psychology',
+    body: 'Built from real experience with blown accounts, overtrading, and FOMO. The material leads with discipline, patience, and execution, not the pretense that trading is easy.',
+  },
+];
+
+const DELIVERABLES = [
+  { icon: ListChecks, title: 'A watchlist process', desc: 'How to find stocks.' },
+  { icon: ShieldCheck, title: 'A risk plan', desc: 'How much to risk.' },
+  { icon: BookOpen, title: 'A journal', desc: 'How to improve.' },
+  { icon: Layers, title: 'A playbook', desc: 'What setups you trade.' },
+];
+
+const TERMINAL_FEATURES = [
+  { icon: Zap, label: 'Built for options day trading' },
+  { icon: Cpu, label: 'Multi-agent persona (Zeus AI)' },
+  { icon: LayoutDashboard, label: 'Full terminal & dashboard access' },
+  { icon: Activity, label: 'Order flow monitor' },
+  { icon: Bell, label: 'Automated watchlist & alerts' },
+  { icon: BookOpen, label: 'AI-assisted journaling & analytics' },
+  { icon: LineChart, label: 'Market structure tooling' },
+];
 
 const AlphaTradingLanding = () => {
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
-  const handleJoinNow = () => {
-    window.open('https://buy.stripe.com/dRmdR876a15ebf183c5os0a', '_blank');
+  const checkout = (key) => {
+    const url = CHECKOUT[key];
+    if (url && url !== '#') window.open(url, '_blank');
+    else scrollTo('packages');
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #0f172a 100%)',
-      color: 'white'
-    }}>
+    <>
       {/* Navigation */}
-      <nav style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        padding: '1.5rem'
-      }}>
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-{/* Your Actual Alpha Logo */}
-<div style={{ width: '3rem', height: '3rem', position: 'relative' }}>
-  <img 
-    src="/Alpha Trading.png" 
-    alt="Alpha Trading Logo" 
-    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-  />
-</div>
-            <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'white' }}>Alpha Trading Pros</div>
+      <nav className="nav">
+        <div className="nav__inner">
+          <a className="brand" href="#top" onClick={(e) => { e.preventDefault(); scrollTo('top'); }}>
+            <img src="/Alpha Trading.png" alt="Alpha Trading Pros" />
+            <span>Alpha Trading Pros</span>
+          </a>
+          <div className="nav__links">
+            <a href="#approach" onClick={(e) => { e.preventDefault(); scrollTo('approach'); }}>Approach</a>
+            <a href="#packages" onClick={(e) => { e.preventDefault(); scrollTo('packages'); }}>Packages</a>
+            <a href="#terminal" onClick={(e) => { e.preventDefault(); scrollTo('terminal'); }}>Terminal</a>
+            <button className="btn btn-ghost" style={{ padding: '0.55rem 1.1rem', fontSize: '0.92rem' }} onClick={() => scrollTo('packages')}>Apply</button>
           </div>
-          <button 
-            onClick={handleJoinNow}
-            style={{
-              backgroundColor: '#10b981',
-              color: 'white',
-              fontWeight: '600',
-              padding: '0.5rem 1.5rem',
-              borderRadius: '0.5rem',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'background-color 0.3s'
-            }}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#059669'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#10b981'}
-          >
-            Subscribe Now
-          </button>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section style={{
-        position: 'relative',
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        paddingTop: '5rem'
-      }}>
-        <div style={{
-          position: 'relative',
-          zIndex: 10,
-          textAlign: 'center',
-          padding: '0 1.5rem',
-          maxWidth: '1200px',
-          margin: '0 auto'
-        }}>
-          <div style={{
-            marginBottom: '2rem',
-            display: 'inline-flex',
-            alignItems: 'center',
-            backgroundColor: 'rgba(16, 185, 129, 0.2)',
-            border: '1px solid rgba(16, 185, 129, 0.3)',
-            borderRadius: '9999px',
-            padding: '0.5rem 1.5rem',
-            backdropFilter: 'blur(4px)'
-          }}>
-            <TrendingUp style={{ width: '1.25rem', height: '1.25rem', marginRight: '0.5rem', color: '#10b981' }} />
-            <span style={{ color: '#10b981', fontWeight: '500' }}>Live Trading Signals</span>
-          </div>
-
-          <h1 style={{
-            fontSize: 'clamp(2.5rem, 8vw, 4.5rem)',
-            fontWeight: 'bold',
-            marginBottom: '1.5rem',
-            background: 'linear-gradient(to right, white, #bfdbfe, #10b981)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            lineHeight: '1.1'
-          }}>
-            Turn Market Moves into
-            <span style={{ display: 'block', color: '#10b981' }}>Profits</span>
-          </h1>
-
-          <p style={{
-            fontSize: 'clamp(1rem, 3vw, 1.5rem)',
-            marginBottom: '3rem',
-            color: '#cbd5e1',
-            maxWidth: '48rem',
-            margin: '0 auto 3rem auto',
-            lineHeight: '1.6'
-          }}>
-            Get live trading signals, monthly webinars, and exclusive educational resources to trade smarter with options and futures.
-          </p>
-
-          <button 
-            onClick={handleJoinNow}
-            style={{
-              position: 'relative',
-              background: 'linear-gradient(to right, #10b981, #2563eb)',
-              color: 'white',
-              fontWeight: 'bold',
-              padding: '1.5rem 3rem',
-              borderRadius: '0.75rem',
-              fontSize: '1.25rem',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.75rem'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.transform = 'scale(1.05)';
-              e.target.style.boxShadow = '0 25px 50px -12px rgba(16, 185, 129, 0.25)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.transform = 'scale(1)';
-              e.target.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
-            }}
-          >
-            <span style={{ position: 'relative', zIndex: 10, display: 'flex', alignItems: 'center' }}>
-              Join Now – Start Your Trading Journey
-              <ArrowRight style={{ marginLeft: '0.75rem', width: '1.5rem', height: '1.5rem' }} />
-            </span>
-          </button>
-
-          <div style={{ marginTop: '4rem' }}>
-            <ChevronDown style={{ width: '2rem', height: '2rem', margin: '0 auto', color: '#64748b', animation: 'bounce 2s infinite' }} />
-          </div>
-        </div>
-      </section>
-
-      {/* About/Credibility Section */}
-      <section style={{ padding: '5rem 0' }}>
-        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 1.5rem', textAlign: 'center' }}>
-          <div style={{
-            backgroundColor: 'rgba(30, 41, 59, 0.3)',
-            backdropFilter: 'blur(16px)',
-            borderRadius: '1rem',
-            padding: '3rem',
-            border: '1px solid rgba(71, 85, 105, 0.5)'
-          }}>
-            <div style={{
-              width: '6rem',
-              height: '6rem',
-              background: 'linear-gradient(to bottom right, #10b981, #2563eb)',
-              borderRadius: '50%',
-              margin: '0 auto 2rem auto',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <TrendingUp style={{ width: '3rem', height: '3rem', color: 'white' }} />
-            </div>
-            
-            <h2 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Meet Your Trading Guide</h2>
-            
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ color: '#10b981', fontWeight: 'bold', fontSize: '1.5rem' }}>MBA</div>
-                <div style={{ color: '#cbd5e1' }}>Specializing in CFA</div>
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ color: '#3b82f6', fontWeight: 'bold', fontSize: '1.5rem' }}>2019</div>
-                <div style={{ color: '#cbd5e1' }}>Trading Options Since</div>
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ color: '#a855f7', fontWeight: 'bold', fontSize: '1.5rem' }}>Recent</div>
-                <div style={{ color: '#cbd5e1' }}>Started Futures Trading</div>
-              </div>
-            </div>
-            
-            <p style={{ fontSize: '1.125rem', color: '#cbd5e1', lineHeight: '1.6' }}>
-              I'm focused on documenting my trading journey and sharing actionable signals that work. 
-              My mission is to help retail traders navigate the markets with confidence through proven strategies and real-time insights.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Subscription Offer Section */}
-      <section id="subscription" style={{
-        padding: '5rem 0',
-        background: 'linear-gradient(to bottom right, rgba(30, 41, 59, 0.5), rgba(37, 99, 235, 0.5))'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-              What You Get as an
-              <span style={{ color: '#10b981' }}> Alpha Trading Subscriber</span>
-            </h2>
-            <p style={{ fontSize: '1.25rem', color: '#cbd5e1', maxWidth: '48rem', margin: '0 auto' }}>
-              Everything you need to trade smarter, learn faster, and manage risk with discipline
-            </p>
-          </div>
-
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem',
-            marginBottom: '4rem'
-          }}>
-            {[
-              { icon: Calendar, title: 'Monthly Webinars', desc: 'Exclusive strategies, live Q&A sessions, and market analysis', color: '#10b981' },
-              { icon: Zap, title: 'Live Trading Signals', desc: 'Real-time alerts delivered via WhatsApp or Telegram', color: '#3b82f6' },
-              { icon: Play, title: 'Recorded Webinars', desc: 'Access to all past sessions – watch anytime, anywhere', color: '#a855f7' },
-              { icon: BookOpen, title: 'Educational Mini-Series', desc: 'Learn trading foundations from beginner to advanced', color: '#f59e0b' },
-              { icon: Target, title: 'Resources & Reading Lists', desc: 'Curated trading books and premium materials', color: '#06b6d4' },
-              { icon: Bell, title: 'Market News Alerts', desc: 'Live market-moving news delivered via Telegram', color: '#ef4444' },
-              { icon: Mail, title: 'Weekly Newsletter', desc: 'Market insights, trade recaps, and upcoming opportunities', color: '#eab308' }
-            ].map((feature, index) => (
-              <div key={index} style={{
-                backgroundColor: 'rgba(30, 41, 59, 0.4)',
-                backdropFilter: 'blur(16px)',
-                borderRadius: '0.75rem',
-                padding: '2rem',
-                border: '1px solid rgba(71, 85, 105, 0.5)',
-                transition: 'all 0.3s',
-                cursor: 'pointer'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.borderColor = feature.color;
-                e.currentTarget.querySelector('.icon').style.transform = 'scale(1.1)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.borderColor = 'rgba(71, 85, 105, 0.5)';
-                e.currentTarget.querySelector('.icon').style.transform = 'scale(1)';
-              }}
-              >
-                <feature.icon className="icon" style={{
-                  width: '3rem',
-                  height: '3rem',
-                  color: feature.color,
-                  marginBottom: '1.5rem',
-                  transition: 'transform 0.3s'
-                }} />
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>{feature.title}</h3>
-                <p style={{ color: '#cbd5e1' }}>{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div style={{ textAlign: 'center' }}>
-            <div style={{
-              background: 'linear-gradient(to right, rgba(16, 185, 129, 0.2), rgba(37, 99, 235, 0.2))',
-              borderRadius: '1rem',
-              padding: '2rem',
-              marginBottom: '2rem',
-              border: '1px solid rgba(16, 185, 129, 0.3)'
-            }}>
-              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: '#10b981', marginBottom: '0.5rem' }}>$159.99</div>
-              <div style={{ fontSize: '1.25rem', color: '#cbd5e1' }}>per month</div>
-              <div style={{ fontSize: '0.875rem', color: '#64748b', marginTop: '0.5rem' }}>Cancel anytime • No long-term commitment</div>
-            </div>
-            
-            <button 
-              onClick={handleJoinNow}
-              style={{
-                background: 'linear-gradient(to right, #10b981, #2563eb)',
-                color: 'white',
-                fontWeight: 'bold',
-                padding: '1.5rem 3rem',
-                borderRadius: '0.75rem',
-                fontSize: '1.25rem',
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'all 0.3s',
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-              }}
-              onMouseOver={(e) => {
-                e.target.style.transform = 'scale(1.05)';
-                e.target.style.boxShadow = '0 25px 50px -12px rgba(16, 185, 129, 0.25)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.transform = 'scale(1)';
-                e.target.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
-              }}
-            >
-              Subscribe Now – Start Trading Smarter
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* ORB Strategy Teaser */}
-      <section style={{ padding: '5rem 0' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+      <main id="top">
+        {/* Hero */}
+        <section className="hero">
+          <div className="hero__grid">
             <div>
-              <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-                Master the <span style={{ color: '#10b981' }}>ORB Strategy</span>
-              </h2>
-              
-              <div style={{ marginBottom: '2rem' }}>
-                {[
-                  { color: '#10b981', title: 'Mark Pre-Market High (PMH) & Pre-Market Low (PML)', desc: 'Identify key levels before market open' },
-                  { color: '#3b82f6', title: 'Break Above = Calls (Bullish)', desc: 'Enter long positions on upward breakouts' },
-                  { color: '#a855f7', title: 'Break Below = Puts (Bearish)', desc: 'Enter short positions on downward breakouts' },
-                  { color: '#ef4444', title: 'Avoid the "No Trade Zone"', desc: 'Stay disciplined and wait for clear signals' }
-                ].map((item, index) => (
-                  <div key={index} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                    <CheckCircle style={{ width: '1.5rem', height: '1.5rem', color: item.color, marginTop: '0.25rem', marginRight: '1rem', flexShrink: 0 }} />
-                    <div>
-                      <div style={{ fontWeight: '600', marginBottom: '0.25rem' }}>{item.title}</div>
-                      <div style={{ color: '#cbd5e1' }}>{item.desc}</div>
-                    </div>
+              <span className="kicker rise rise-1"><span className="dot" />Mentorship in stocks, options &amp; futures</span>
+              <h1 className="rise rise-2">Trade with a <span className="accent">process</span>, not someone else&apos;s alerts.</h1>
+              <p className="hero__sub rise rise-3">
+                Education-first, 1-on-1 mentorship in decision making, risk management, and trade management.
+                You learn to find and manage trades yourself, so you trade with independence instead of following alerts.
+              </p>
+              <div className="hero__cta rise rise-4">
+                <button className="btn btn-emerald" onClick={() => scrollTo('packages')}>
+                  Choose your package <ArrowRight size={18} />
+                </button>
+                <button className="btn btn-ghost" onClick={() => scrollTo('approach')}>See the approach</button>
+              </div>
+              <p className="hero__note rise rise-5">Stocks. Options. Futures. Risk-first, always.</p>
+            </div>
+
+            {/* Custom market visualization */}
+            <div className="viz rise rise-3" aria-hidden="true">
+              <div className="viz__head">
+                <span>SPY &middot; 4H</span>
+                <span className="viz__tag">illustrative</span>
+              </div>
+              <svg viewBox="0 0 520 300" role="img">
+                <defs>
+                  <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stopColor="#6EE7B7" />
+                    <stop offset="100%" stopColor="#0D9488" />
+                  </linearGradient>
+                  <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="rgba(16,185,129,0.22)" />
+                    <stop offset="100%" stopColor="rgba(16,185,129,0)" />
+                  </linearGradient>
+                </defs>
+                {/* gridlines */}
+                {[60, 120, 180, 240].map((y) => (
+                  <line key={y} x1="0" y1={y} x2="520" y2={y} stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+                ))}
+                {/* area + line */}
+                <path d="M10,250 L60,232 L105,256 L150,205 L195,224 L240,176 L285,198 L330,150 L375,168 L420,116 L465,138 L510,86 L510,300 L10,300 Z" fill="url(#fill)" />
+                <path className="viz__line" d="M10,250 L60,232 L105,256 L150,205 L195,224 L240,176 L285,198 L330,150 L375,168 L420,116 L465,138 L510,86"
+                  fill="none" stroke="url(#stroke)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="510" cy="86" r="5" fill="#34D399" />
+                <circle cx="510" cy="86" r="10" fill="none" stroke="rgba(52,211,153,0.4)" strokeWidth="2" />
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        {/* Where the edge is */}
+        <section className="section section--soft">
+          <div className="wrap--narrow">
+            <p className="eyebrow" style={{ textAlign: 'center', display: 'block', marginBottom: '0.75rem' }}>The real edge</p>
+            <h2 className="h2" style={{ textAlign: 'center', marginBottom: '0.75rem' }}>Most mentors sell products. Few teach skill.</h2>
+            <p className="lead" style={{ textAlign: 'center', maxWidth: '36rem', margin: '0 auto 2.5rem' }}>
+              The whole industry sells the same things. Almost none of it makes you a better trader.
+            </p>
+            <div className="split">
+              <div className="col col--sell">
+                <h3>Most mentors sell</h3>
+                {SELL.map((item) => (
+                  <div className="row" key={item}><X size={18} color="var(--red)" /><span>{item}</span></div>
+                ))}
+              </div>
+              <div className="col col--teach">
+                <h3>We actually teach</h3>
+                {TEACH.map((item) => (
+                  <div className="row" key={item}><Check size={18} color="var(--emerald-bright)" /><span>{item}</span></div>
+                ))}
+              </div>
+            </div>
+            <p className="edge-line">That is where your <span className="accent">edge</span> is.</p>
+          </div>
+        </section>
+
+        {/* Approach */}
+        <section className="section" id="approach">
+          <div className="wrap">
+            <p className="eyebrow">The approach</p>
+            <h2 className="h2" style={{ margin: '0.6rem 0 0.75rem' }}>The Alpha Trading Pros difference</h2>
+            <p className="lead" style={{ maxWidth: '42rem' }}>
+              We do not hand you tickers. We build the judgment that lets you find and manage trades on your own.
+            </p>
+
+            {/* Two pillars */}
+            <div className="pillars">
+              <div className="pillar">
+                <Brain className="icon" size={30} />
+                <h3>We teach you how to think, not what to buy</h3>
+                <p>Most communities create dependency: buy this, watch that, here is today&apos;s alert. We do the opposite and teach you to spot opportunities yourself. The goal is independence.</p>
+                <div className="qa">
+                  <div className="qa-item"><span className="x">they say</span> "Buy this. Here is the alert."</div>
+                  <div className="qa-item"><span className="c">we teach</span> "Here is how to find it yourself."</div>
+                </div>
+              </div>
+              <div className="pillar">
+                <ShieldCheck className="icon" size={30} />
+                <h3>Risk management comes before profit</h3>
+                <p>Most traders ask how much they can make. We start with how much they can lose. Position sizing, stop placement, scaling out, and journaling come before any advanced setup.</p>
+                <div className="qa">
+                  <div className="qa-item"><span className="x">they ask</span> "How much can I make?"</div>
+                  <div className="qa-item"><span className="c">we ask</span> "How much can I lose?"</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Curriculum */}
+            <div className="curriculum">
+              <div className="curriculum__head">
+                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.3rem,2vw,1.7rem)' }}>A structured path, not random alerts</h3>
+                <span className="mono" style={{ color: 'var(--text-faint)', fontSize: '0.82rem' }}>4-part progression</span>
+              </div>
+              <div className="days">
+                {DAYS.map((d) => (
+                  <div className="day" key={d.n}>
+                    <div className="day__n mono">{d.n}</div>
+                    <div className="day__t">{d.t}</div>
                   </div>
                 ))}
               </div>
-              
-              <button 
-                onClick={handleJoinNow}
-                style={{
-                  background: 'linear-gradient(to right, #10b981, #2563eb)',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  padding: '1rem 2rem',
-                  borderRadius: '0.75rem',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s'
-                }}
-                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-              >
-                Learn This Strategy in Our Monthly Webinars
-              </button>
             </div>
-            
-            <div style={{
-              backgroundColor: 'rgba(30, 41, 59, 0.3)',
-              backdropFilter: 'blur(16px)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              border: '1px solid rgba(71, 85, 105, 0.5)'
-            }}>
-              <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>ORB Strategy Visualization</h3>
-              </div>
-              
-              <div style={{
-                position: 'relative',
-                height: '16rem',
-                backgroundColor: 'rgba(15, 23, 42, 0.5)',
-                borderRadius: '0.5rem',
-                padding: '1rem'
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  top: '2rem',
-                  left: '1rem',
-                  right: '1rem',
-                  borderTop: '2px dashed #10b981'
-                }}>
-                  <div style={{ fontSize: '0.75rem', color: '#10b981', marginTop: '-0.75rem' }}>PMH</div>
-                </div>
-                
-                <div style={{
-                  position: 'absolute',
-                  bottom: '2rem',
-                  left: '1rem',
-                  right: '1rem',
-                  borderTop: '2px dashed #ef4444'
-                }}>
-                  <div style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: '-0.75rem' }}>PML</div>
-                </div>
-                
-                <div style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '1rem',
-                  right: '1rem',
-                  transform: 'translateY(-50%)',
-                  backgroundColor: 'rgba(234, 179, 8, 0.2)',
-                  height: '4rem',
-                  borderRadius: '0.25rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <span style={{ color: '#eab308', fontSize: '0.875rem', fontWeight: '500' }}>No Trade Zone</span>
-                </div>
-                
-                <div style={{ position: 'absolute', top: '0.5rem', right: '1rem', fontSize: '0.75rem', color: '#10b981' }}>📈 Calls Zone</div>
-                <div style={{ position: 'absolute', bottom: '0.5rem', right: '1rem', fontSize: '0.75rem', color: '#ef4444' }}>📉 Puts Zone</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* What's Included Section */}
-      <section style={{
-        padding: '5rem 0',
-        background: 'linear-gradient(to right, rgba(30, 41, 59, 0.5), rgba(126, 34, 206, 0.3))'
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-              What You Get as an <span style={{ color: '#10b981' }}>Alpha Trader</span>
-            </h2>
-            <p style={{ fontSize: '1.25rem', color: '#cbd5e1', maxWidth: '48rem', margin: '0 auto' }}>
-              Everything in the subscription, laid out plainly — live signals, structured education, and weekly market context
-            </p>
-          </div>
-
-          {/* What's Included */}
-          <div style={{ marginTop: '4rem', textAlign: 'center' }}>
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '2rem',
-              marginBottom: '3rem'
-            }}>
-              {[
-                { number: 'Live', label: 'Signals via WhatsApp & Telegram', color: '#10b981' },
-                { number: 'Monthly', label: 'Live Strategy Webinars', color: '#3b82f6' },
-                { number: 'Weekly', label: 'Newsletter & Trade Recaps', color: '#a855f7' },
-                { number: 'ORB', label: 'Strategy Education & Mentorship', color: '#eab308' }
-              ].map((stat, index) => (
-                <div key={index} style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '2rem', fontWeight: 'bold', color: stat.color, marginBottom: '0.5rem' }}>{stat.number}</div>
-                  <div style={{ color: '#cbd5e1' }}>{stat.label}</div>
+            {/* Three principles */}
+            <div className="principles">
+              {PRINCIPLES.map((p) => (
+                <div className="principle" key={p.title}>
+                  <p.icon className="icon" size={24} />
+                  <h4>{p.title}</h4>
+                  <p>{p.body}</p>
                 </div>
               ))}
             </div>
 
-            <div style={{
-              backgroundColor: 'rgba(16, 185, 129, 0.1)',
-              border: '1px solid rgba(16, 185, 129, 0.3)',
-              borderRadius: '1rem',
-              padding: '2rem',
-              maxWidth: '48rem',
-              margin: '0 auto'
-            }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#10b981' }}>Ready to Trade with Structure?</h3>
-              <p style={{ fontSize: '1.125rem', color: '#cbd5e1', marginBottom: '1.5rem' }}>
-                Join a community focused on disciplined, rules-based trading — learn the process before you risk capital
-              </p>
-              <button 
-                onClick={handleJoinNow}
-                style={{
-                  background: 'linear-gradient(to right, #10b981, #2563eb)',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  padding: '1rem 2.5rem',
-                  borderRadius: '0.75rem',
-                  fontSize: '1.125rem',
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s',
-                  boxShadow: '0 10px 25px rgba(0, 0, 0, 0.1)'
-                }}
-                onMouseOver={(e) => {
-                  e.target.style.transform = 'scale(1.05)';
-                  e.target.style.boxShadow = '0 10px 25px rgba(16, 185, 129, 0.2)';
-                }}
-                onMouseOut={(e) => {
-                  e.target.style.transform = 'scale(1)';
-                  e.target.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
-                }}
-              >
-                Get Started Now - $159.99/Month
-              </button>
-              <p style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '1.5rem', lineHeight: '1.5' }}>
-                Trading futures and options involves substantial risk of loss and is not suitable for every investor.
-                Signals and education are provided for informational purposes only and are not financial advice.
-                Past performance is not indicative of future results.
+            {/* Deliverables */}
+            <div style={{ marginTop: 'clamp(3rem,6vw,4.5rem)' }}>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem,3vw,2.25rem)', marginBottom: '0.5rem' }}>You leave with a repeatable process</h3>
+              <p className="lead" style={{ maxWidth: '38rem' }}>Four things you own for life, long after the sessions end.</p>
+              <div className="deliverables">
+                {DELIVERABLES.map((d) => (
+                  <div className="deliverable" key={d.title}>
+                    <d.icon className="icon" size={26} />
+                    <h4>{d.title}</h4>
+                    <p>{d.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Mentor */}
+        <section className="section section--soft">
+          <div className="wrap mentor">
+            <div className="mentor__card">
+              <img src="/Alpha Trading.png" alt="Alpha Trading Pros" />
+              <div className="mentor__meta">MBA &middot; Options since 2019 &middot; Now trading futures</div>
+            </div>
+            <div>
+              <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>Your mentor</p>
+              <p className="body">
+                I have lived the hard parts of this business: <strong>blown accounts, overtrading, FOMO, and sizing mistakes.</strong>
+                {' '}That is exactly why my mentorship leads with discipline, risk, and a repeatable process instead of hype.
+                My job is to make you independent, not dependent on me.
               </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Final CTA Section */}
-      <section style={{
-        padding: '5rem 0',
-        background: 'linear-gradient(to right, #10b981, #2563eb)'
-      }}>
-        <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 1.5rem', textAlign: 'center' }}>
-          <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 'bold', marginBottom: '1.5rem' }}>
-            Don't Trade Alone – Learn a Structured, Rules-Based Approach
-          </h2>
+        {/* Packages */}
+        <section className="section" id="packages">
+          <div className="wrap">
+            <p className="eyebrow" style={{ textAlign: 'center', display: 'block' }}>Mentorship</p>
+            <h2 className="h2" style={{ textAlign: 'center', margin: '0.6rem 0 0.75rem' }}>Choose your package</h2>
+            <p className="lead" style={{ textAlign: 'center', maxWidth: '34rem', margin: '0 auto' }}>
+              Three levels of 1-on-1 mentorship. Pick the one that fits your goals.
+            </p>
 
-          <p style={{ fontSize: '1.25rem', marginBottom: '3rem', opacity: 0.9 }}>
-            Join Alpha Trading today for live signals, education, and a community that takes risk management seriously
+            <div className="packages">
+              {PACKAGES.map((pkg) => (
+                <div className={`pkg${pkg.featured ? ' pkg--featured' : ''}`} key={pkg.key}>
+                  {pkg.featured && <div className="pkg__tag">Most chosen</div>}
+                  <div className="pkg__name">{pkg.name}</div>
+                  <div className="pkg__sub">{pkg.sub}</div>
+                  <div className="pkg__price mono">{pkg.price}</div>
+                  <div className="pkg__cadence">{pkg.cadence}</div>
+                  <ul className="pkg__features">
+                    {pkg.features.map((f) => (
+                      <li key={f}><Check size={17} /><span>{f}</span></li>
+                    ))}
+                  </ul>
+                  <div className="pkg__spacer" />
+                  <button
+                    className={`btn ${pkg.featured ? 'btn-emerald' : 'btn-ghost'} btn-block pkg__btn`}
+                    onClick={() => checkout(pkg.key)}
+                  >
+                    {pkg.cta}
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <p className="muted" style={{ textAlign: 'center', fontSize: '0.82rem', maxWidth: '46rem', margin: '2.5rem auto 0', lineHeight: 1.6 }}>
+              Trading stocks, options, and futures involves substantial risk of loss and is not suitable for every investor.
+              Mentorship and education are provided for informational purposes only and are not financial advice.
+              Past performance is not indicative of future results.
+            </p>
+          </div>
+        </section>
+
+        {/* Terminal subscription (separate product) */}
+        <section className="section section--soft" id="terminal">
+          <div className="wrap">
+            <div className="terminal">
+              <div className="sigma" aria-hidden="true">
+                <div className="sigma__top">
+                  <div className="sigma__brand">
+                    <span className="sigma__logo">&Sigma;</span>
+                    <span><b>Sigma</b> Terminal<br /><i>Options Desk</i></span>
+                  </div>
+                  <span className="sigma__live"><span className="dot" />LIVE</span>
+                </div>
+                <div className="sigma__ticks">
+                  <span>GOOGL <b className="up">+1.23%</b></span>
+                  <span>AMZN <b className="down">-0.16%</b></span>
+                  <span>MSFT <b className="down">-0.61%</b></span>
+                  <span>NVDA <b className="up">+0.74%</b></span>
+                </div>
+                <div className="sigma__card">
+                  <div className="sigma__cardtop">
+                    <span className="sigma__sym">GOOGL <em className="badge-bear">BEARISH</em></span>
+                    <span className="badge-open">OPEN</span>
+                  </div>
+                  <div className="sigma__price">$349.49 <span className="up">+1.23%</span><span className="sigma__u">UNDERLYING</span></div>
+                  <div className="sigma__tp">
+                    <div><span className="lbl">TAKE PROFIT</span><span className="up">$341.72 &rarr; $320.00</span> <span className="prem">+44% prem</span></div>
+                    <div><span className="lbl">STOP</span><span className="down">$400.00</span> <span className="prem">-24% prem</span></div>
+                  </div>
+                  <div className="sigma__contract"><span>347.5P 07-02 paid $7.41 &rarr; now $6.63</span><b className="down">-10.5% -$78 &middot; 1 ct</b></div>
+                  <div className="sigma__conf">
+                    <div className="sigma__conflabel"><span>AI CONFIDENCE</span><span>65%</span></div>
+                    <div className="sigma__bar"><i style={{ width: '65%' }} /></div>
+                  </div>
+                  <div className="sigma__why"><b>WHY</b> [PAPER] 31 put flow alerts totaling $4.9M premium. Support stack 342/320.</div>
+                </div>
+                <div className="sigma__nav">
+                  <span className="on">Signals</span><span>Screener</span><span>Agents</span><span>Flow</span><span>Portal</span>
+                </div>
+              </div>
+              <div>
+                <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>Software, no mentorship required</p>
+                <h2 className="h2" style={{ marginBottom: '0.75rem' }}>The Sigma Terminal</h2>
+                <p className="lead" style={{ maxWidth: '34rem', marginBottom: '1.5rem' }}>
+                  An options day trading desk with built-in AI automation. Want it on its own? Get it as a standalone monthly subscription, completely separate from mentorship.
+                </p>
+                <ul className="terminal__features">
+                  {TERMINAL_FEATURES.map((f) => (
+                    <li key={f.label}><f.icon size={18} /><span>{f.label}</span></li>
+                  ))}
+                </ul>
+                <div className="sigma__pricing">
+                  <span className="sigma__price-big mono">$395 <i>/month</i></span>
+                  <button className="btn btn-emerald" onClick={() => checkout('terminal')}>
+                    Start the terminal <ArrowRight size={18} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="section final">
+          <div className="wrap">
+            <h2>Build skill that outlasts any alert.</h2>
+            <p>Pick the mentorship level that fits your goals and start trading a process you actually understand.</p>
+            <button className="btn btn-emerald" onClick={() => scrollTo('packages')}>
+              Choose your package <ArrowRight size={18} />
+            </button>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="footer">
+        <div className="footer__inner">
+          <div>
+            <a className="brand" href="#top" onClick={(e) => { e.preventDefault(); scrollTo('top'); }}>
+              <img src="/Alpha Trading.png" alt="Alpha Trading Pros" style={{ width: '1.75rem', height: '1.75rem' }} />
+              <span>Alpha Trading Pros</span>
+            </a>
+            <p className="muted" style={{ fontSize: '0.85rem', marginTop: '0.75rem' }}>
+              Questions? <a className="mail" href="mailto:info@alphadatacapital.com?subject=Mentorship Inquiry">info@alphadatacapital.com</a>
+            </p>
+            <p className="muted" style={{ fontSize: '0.8rem', marginTop: '0.5rem' }}>&copy; 2026 Alpha Trading Pros</p>
+          </div>
+          <p className="footer__dis">
+            Trading stocks, options, and futures involves substantial risk of loss and is not suitable for every investor.
+            Mentorship and education are provided for informational purposes only and are not financial advice.
+            Past performance is not indicative of future results.
           </p>
-          
-          <button 
-            onClick={handleJoinNow}
-            style={{
-              backgroundColor: 'white',
-              color: '#10b981',
-              fontWeight: 'bold',
-              padding: '1.5rem 3rem',
-              borderRadius: '0.75rem',
-              fontSize: '1.25rem',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-            }}
-            onMouseOver={(e) => {
-              e.target.style.backgroundColor = '#f1f5f9';
-              e.target.style.transform = 'scale(1.05)';
-            }}
-            onMouseOut={(e) => {
-              e.target.style.backgroundColor = 'white';
-              e.target.style.transform = 'scale(1)';
-            }}
-          >
-            Join Alpha Trading Today
-          </button>
         </div>
-      </section>
+      </footer>
 
-      {/* Floating Contact Button */}
-      <div style={{
-        position: 'fixed',
-        bottom: '1.5rem',
-        right: '1.5rem',
-        zIndex: 50
-      }}>
-        <a 
-          href="mailto:info@alphadatacapital.com?subject=Support Request"
-          style={{
-            backgroundColor: '#3b82f6',
-            color: 'white',
-            padding: '1rem',
-            borderRadius: '50%',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-            transition: 'all 0.3s',
-            display: 'block'
-          }}
-          onMouseOver={(e) => {
-            e.target.style.backgroundColor = '#2563eb';
-            e.target.style.transform = 'scale(1.1)';
-          }}
-          onMouseOut={(e) => {
-            e.target.style.backgroundColor = '#3b82f6';
-            e.target.style.transform = 'scale(1)';
-          }}
-        >
-          <MessageCircle style={{ width: '1.5rem', height: '1.5rem' }} />
-        </a>
-      </div>
-
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-          }
-        `
-      }} />
-    </div>
+      {/* Floating contact */}
+      <a className="fab" href="mailto:info@alphadatacapital.com?subject=Mentorship Inquiry" aria-label="Email Alpha Trading Pros">
+        <MessageCircle size={22} />
+      </a>
+    </>
   );
 };
 

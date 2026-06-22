@@ -5,11 +5,11 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Alpha Trading Pros - Live Trading Signals & Options Education | $159.99/Month</title>
-        <meta name="description" content="Get live trading signals, monthly webinars, and exclusive educational resources for options and futures trading. Disciplined, rules-based ORB strategy education. Subscribe for $159.99/month." />
-        
+        <title>Alpha Trading Pros - 1-on-1 Trading Mentorship | Stocks, Options & Futures</title>
+        <meta name="description" content="Education-first, 1-on-1 trading mentorship that teaches decision-making, risk management, and a repeatable process. Stocks, options, and futures mentorship packages plus the Sigma Terminal." />
+
         {/* SEO Keywords */}
-        <meta name="keywords" content="trading signals, options trading, futures trading, trading education, prop firm trading, ORB strategy, trading subscription, live trading alerts, trading webinars, options signals, day trading, swing trading" />
+        <meta name="keywords" content="trading mentorship, 1-on-1 trading coach, options mentorship, futures mentorship, stock trading mentorship, wheel strategy, risk management, trading psychology, trade management, SPY trading, small cap trading, trading education" />
         
         {/* Viewport and basics */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,8 +24,8 @@ export default function Home() {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://alphatradingpros.com/" />
-        <meta property="og:title" content="Alpha Trading Pros - Live Trading Signals & Options Education" />
-        <meta property="og:description" content="Live trading signals, monthly webinars, and structured educational resources for options and futures trading." />
+        <meta property="og:title" content="Alpha Trading Pros - 1-on-1 Trading Mentorship" />
+        <meta property="og:description" content="Education-first mentorship in stocks, options, and futures. Learn decision-making, risk management, and a repeatable process, not someone else's alerts." />
         <meta property="og:image" content="https://alphatradingpros.com/Alpha Trading.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -36,8 +36,8 @@ export default function Home() {
         <meta property="twitter:site" content="@AlphaTradingHQ" />
         <meta property="twitter:creator" content="@AlphaTradingHQ" />
         <meta property="twitter:url" content="https://alphatradingpros.com/" />
-        <meta property="twitter:title" content="Alpha Trading Pros - Live Trading Signals & Options Education" />
-        <meta property="twitter:description" content="Live trading signals, monthly webinars, and structured education for options and futures traders." />
+        <meta property="twitter:title" content="Alpha Trading Pros - 1-on-1 Trading Mentorship" />
+        <meta property="twitter:description" content="Education-first mentorship in stocks, options, and futures. Learn a repeatable process, not someone else's alerts." />
         <meta property="twitter:image" content="https://alphatradingpros.com/Alpha Trading.png" />
 
         {/* Additional SEO */}
@@ -54,21 +54,22 @@ export default function Home() {
               "name": "Alpha Trading Pros",
               "url": "https://alphatradingpros.com",
               "logo": "https://alphatradingpros.com/Alpha Trading.png",
-              "description": "Professional trading signals and education for options and futures traders",
+              "description": "1-on-1 trading mentorship and education for stocks, options, and futures traders",
               "founder": {
                 "@type": "Person",
                 "name": "Alpha Trading Pros Team"
               },
               "offers": {
-                "@type": "Offer",
-                "name": "Alpha Trading Subscription",
-                "price": "159.99",
+                "@type": "AggregateOffer",
+                "name": "Alpha Trading Pros Mentorship Packages",
+                "lowPrice": "2495",
+                "highPrice": "5995",
                 "priceCurrency": "USD",
-                "priceValidUntil": "2025-12-31",
-                "itemCondition": "https://schema.org/NewCondition",
+                "offerCount": "3",
+                "priceValidUntil": "2026-12-31",
                 "availability": "https://schema.org/InStock",
-                "url": "https://alphatradingpros.com",
-                "description": "Monthly subscription for live trading signals, webinars, and educational resources"
+                "url": "https://alphatradingpros.com/#packages",
+                "description": "1-on-1 mentorship packages in stocks, options, and futures, plus the Sigma Terminal subscription"
               },
               "contactPoint": {
                 "@type": "ContactPoint",
