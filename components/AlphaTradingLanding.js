@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Check, X, ArrowRight, Brain, ShieldCheck, Target, LineChart, Activity,
   ListChecks, BookOpen, Layers, Cpu, LayoutDashboard, Bell, MessageCircle, Zap
@@ -108,7 +108,7 @@ const DELIVERABLES = [
 
 const TERMINAL_FEATURES = [
   { icon: Zap, label: 'Built for options day trading' },
-  { icon: Cpu, label: 'Multi-agent persona (Zeus AI)' },
+  { icon: Cpu, label: 'Seven-perspective research desk' },
   { icon: LayoutDashboard, label: 'Full terminal & dashboard access' },
   { icon: Activity, label: 'Order flow monitor' },
   { icon: Bell, label: 'Automated watchlist & alerts' },
@@ -117,6 +117,7 @@ const TERMINAL_FEATURES = [
 ];
 
 const AlphaTradingLanding = () => {
+  const terminalVideoRef = useRef(null);
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   const checkout = (key) => {
@@ -124,6 +125,48 @@ const AlphaTradingLanding = () => {
     if (url && url !== '#') window.open(url, '_blank');
     else scrollTo('packages');
   };
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const sections = document.querySelectorAll('.motion-reveal');
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-visible'));
+      terminalVideoRef.current?.pause();
+      return undefined;
+    }
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 },
+    );
+
+    sections.forEach((section) => revealObserver.observe(section));
+
+    const video = terminalVideoRef.current;
+    const videoObserver = video
+      ? new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        },
+        { threshold: 0.35 },
+      )
+      : null;
+
+    if (video && videoObserver) videoObserver.observe(video);
+
+    return () => {
+      revealObserver.disconnect();
+      videoObserver?.disconnect();
+    };
+  }, []);
 
   return (
     <>
@@ -196,7 +239,7 @@ const AlphaTradingLanding = () => {
         </section>
 
         {/* Where the edge is */}
-        <section className="section section--soft">
+        <section className="section section--soft motion-reveal">
           <div className="wrap--narrow">
             <p className="eyebrow" style={{ textAlign: 'center', display: 'block', marginBottom: '0.75rem' }}>The real edge</p>
             <h2 className="h2" style={{ textAlign: 'center', marginBottom: '0.75rem' }}>Most mentors sell products. Few teach skill.</h2>
@@ -222,7 +265,7 @@ const AlphaTradingLanding = () => {
         </section>
 
         {/* Approach */}
-        <section className="section" id="approach">
+        <section className="section motion-reveal" id="approach">
           <div className="wrap">
             <p className="eyebrow">The approach</p>
             <h2 className="h2" style={{ margin: '0.6rem 0 0.75rem' }}>The Alpha Trading Pros difference</h2>
@@ -297,7 +340,7 @@ const AlphaTradingLanding = () => {
         </section>
 
         {/* Mentor */}
-        <section className="section section--soft">
+        <section className="section section--soft motion-reveal">
           <div className="wrap mentor">
             <div className="mentor__card">
               <img src="/Alpha Trading.png" alt="Alpha Trading Pros" />
@@ -315,7 +358,7 @@ const AlphaTradingLanding = () => {
         </section>
 
         {/* Packages */}
-        <section className="section" id="packages">
+        <section className="section motion-reveal" id="packages">
           <div className="wrap">
             <p className="eyebrow" style={{ textAlign: 'center', display: 'block' }}>Mentorship</p>
             <h2 className="h2" style={{ textAlign: 'center', margin: '0.6rem 0 0.75rem' }}>Choose your package</h2>
@@ -356,47 +399,30 @@ const AlphaTradingLanding = () => {
         </section>
 
         {/* Terminal subscription (separate product) */}
-        <section className="section section--soft" id="terminal">
+        <section className="section section--soft motion-reveal" id="terminal">
           <div className="wrap">
             <div className="terminal">
-              <div className="sigma" aria-hidden="true">
-                <div className="sigma__top">
-                  <div className="sigma__brand">
-                    <span className="sigma__logo">&Sigma;</span>
-                    <span><b>Sigma</b> Terminal<br /><i>Options Desk</i></span>
-                  </div>
-                  <span className="sigma__live"><span className="dot" />LIVE</span>
-                </div>
-                <div className="sigma__ticks">
-                  <span>GOOGL <b className="up">+1.23%</b></span>
-                  <span>AMZN <b className="down">-0.16%</b></span>
-                  <span>MSFT <b className="down">-0.61%</b></span>
-                  <span>NVDA <b className="up">+0.74%</b></span>
-                </div>
-                <div className="sigma__card">
-                  <div className="sigma__cardtop">
-                    <span className="sigma__sym">GOOGL <em className="badge-bear">BEARISH</em></span>
-                    <span className="badge-open">OPEN</span>
-                  </div>
-                  <div className="sigma__price">$349.49 <span className="up">+1.23%</span><span className="sigma__u">UNDERLYING</span></div>
-                  <div className="sigma__tp">
-                    <div><span className="lbl">TAKE PROFIT</span><span className="up">$341.72 &rarr; $320.00</span> <span className="prem">+44% prem</span></div>
-                    <div><span className="lbl">STOP</span><span className="down">$400.00</span> <span className="prem">-24% prem</span></div>
-                  </div>
-                  <div className="sigma__contract"><span>347.5P 07-02 paid $7.41 &rarr; now $6.63</span><b className="down">-10.5% -$78 &middot; 1 ct</b></div>
-                  <div className="sigma__conf">
-                    <div className="sigma__conflabel"><span>AI CONFIDENCE</span><span>65%</span></div>
-                    <div className="sigma__bar"><i style={{ width: '65%' }} /></div>
-                  </div>
-                  <div className="sigma__why"><b>WHY</b> [PAPER] 31 put flow alerts totaling $4.9M premium. Support stack 342/320.</div>
-                </div>
-                <div className="sigma__nav">
-                  <span className="on">Signals</span><span>Screener</span><span>Agents</span><span>Flow</span><span>Portal</span>
-                </div>
-              </div>
+              <figure className="terminal-motion">
+                <video
+                  ref={terminalVideoRef}
+                  className="terminal-motion__video"
+                  muted
+                  loop
+                  playsInline
+                  controls
+                  preload="metadata"
+                  poster="/ast-motion/ast-launch-poster.png"
+                  aria-label="Alpha Sigma Terminal product tour"
+                >
+                  <source src="/ast-motion/ast-launch.mp4" type="video/mp4" />
+                </video>
+                <figcaption>
+                  A quick look at performance accounting, market structure, and research consensus.
+                </figcaption>
+              </figure>
               <div>
                 <p className="eyebrow" style={{ marginBottom: '0.75rem' }}>Software, no mentorship required</p>
-                <h2 className="h2" style={{ marginBottom: '0.75rem' }}>The Sigma Terminal</h2>
+                <h2 className="h2" style={{ marginBottom: '0.75rem' }}>Alpha Sigma Terminal</h2>
                 <p className="lead" style={{ maxWidth: '34rem', marginBottom: '1.5rem' }}>
                   An options day trading desk with built-in AI automation. Want it on its own? Get it as a standalone monthly subscription, completely separate from mentorship.
                 </p>
@@ -417,7 +443,7 @@ const AlphaTradingLanding = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="section final">
+        <section className="section final motion-reveal">
           <div className="wrap">
             <h2>Build skill that outlasts any alert.</h2>
             <p>Pick the mentorship level that fits your goals and start trading a process you actually understand.</p>
